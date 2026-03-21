@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "tag": "forge:gems/diamond"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "pattern": [
+    " MM",
+    " SM",
+    "S  "
+  ],
+  "result": {
+    "item": "tieredtridents:diamond_trident"
+  },
+  "show_notification": true
+}

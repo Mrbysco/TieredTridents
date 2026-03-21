@@ -1,0 +1,12 @@
+{
+  "item.tieredtridents.bone_trident": "Bone Trident",
+  "item.tieredtridents.copper_trident": "Copper Trident",
+  "item.tieredtridents.diamond_trident": "Diamond Trident",
+  "item.tieredtridents.golden_trident": "Golden Trident",
+  "item.tieredtridents.iron_trident": "Iron Trident",
+  "item.tieredtridents.netherite_trident": "Netherite Trident",
+  "item.tieredtridents.pitchfork": "Pitchfork",
+  "item.tieredtridents.stone_trident": "Stone Trident",
+  "item.tieredtridents.wooden_trident": "Wooden Trident",
+  "itemGroup.tieredtridents": "Tiered Tridents"
+}

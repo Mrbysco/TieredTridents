@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "item": "minecraft:blaze_powder"
+    },
+    "S": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "pattern": [
+    " MM",
+    " SM",
+    "S  "
+  ],
+  "result": {
+    "item": "tieredtridents:pitchfork"
+  },
+  "show_notification": true
+}
