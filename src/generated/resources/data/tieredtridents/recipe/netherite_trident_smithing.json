@@ -7,7 +7,8 @@
     "item": "tieredtridents:diamond_trident"
   },
   "result": {
-    "item": "tieredtridents:netherite_trident"
+    "count": 1,
+    "id": "tieredtridents:netherite_trident"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"

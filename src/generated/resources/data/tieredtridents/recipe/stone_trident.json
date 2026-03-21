@@ -3,10 +3,10 @@
   "category": "equipment",
   "key": {
     "M": {
-      "tag": "forge:cobblestone/normal"
+      "tag": "c:cobblestones/normal"
     },
     "S": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:rods/wooden"
     }
   },
   "pattern": [
@@ -15,7 +15,7 @@
     "S  "
   ],
   "result": {
-    "item": "tieredtridents:stone_trident"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "tieredtridents:stone_trident"
+  }
 }

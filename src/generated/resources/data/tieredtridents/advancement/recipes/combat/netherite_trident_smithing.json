@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_material": {
+    "has_netherite_ingot": {
       "conditions": {
         "items": [
           {
-            "tag": "minecraft:planks"
+            "items": "minecraft:netherite_ingot"
           }
         ]
       },
@@ -13,21 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tieredtridents:wooden_trident"
+        "recipe": "tieredtridents:netherite_trident_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_material",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_netherite_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "tieredtridents:wooden_trident"
+      "tieredtridents:netherite_trident_smithing"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

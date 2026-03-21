@@ -1,10 +1,10 @@
 package com.mrbysco.tieredtridents.datagen.data;
 
-import com.mrbysco.tieredtridents.TieredTridents;
 import com.mrbysco.tieredtridents.registry.TridentRegistry;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
@@ -14,19 +14,19 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.common.Tags;
+import net.neoforged.neoforge.common.Tags;
 
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 
 public class TridentRecipeProvider extends RecipeProvider {
-	public TridentRecipeProvider(PackOutput output) {
-		super(output);
+	public TridentRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+		super(output, registries);
 	}
 
 	@Override
-	protected void buildRecipes(Consumer<FinishedRecipe> output) {
+	protected void buildRecipes(RecipeOutput output) {
 		buildTridentRecipe(output, Tags.Items.RODS_WOODEN, ItemTags.PLANKS, TridentRegistry.WOODEN_TRIDENT.get());
-		buildTridentRecipe(output, Tags.Items.RODS_WOODEN, Tags.Items.COBBLESTONE_NORMAL, TridentRegistry.STONE_TRIDENT.get());
+		buildTridentRecipe(output, Tags.Items.RODS_WOODEN, Tags.Items.COBBLESTONES_NORMAL, TridentRegistry.STONE_TRIDENT.get());
 		buildTridentRecipe(output, Tags.Items.RODS_WOODEN, Tags.Items.INGOTS_IRON, TridentRegistry.IRON_TRIDENT.get());
 		buildTridentRecipe(output, Tags.Items.RODS_WOODEN, Tags.Items.INGOTS_COPPER, TridentRegistry.COPPER_TRIDENT.get());
 		buildTridentRecipe(output, Tags.Items.RODS_WOODEN, Tags.Items.INGOTS_GOLD, TridentRegistry.GOLDEN_TRIDENT.get());
@@ -39,7 +39,7 @@ public class TridentRecipeProvider extends RecipeProvider {
 		buildTridentRecipe(output, Items.BLAZE_ROD, Items.BLAZE_POWDER, TridentRegistry.PITCHFORK.get());
 	}
 
-	private void buildTridentRecipe(Consumer<FinishedRecipe> output, ItemLike stick, ItemLike material, ItemLike result) {
+	private void buildTridentRecipe(RecipeOutput output, ItemLike stick, ItemLike material, ItemLike result) {
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result)
 				.pattern(" MM")
 				.pattern(" SM")
@@ -51,7 +51,7 @@ public class TridentRecipeProvider extends RecipeProvider {
 
 	}
 
-	private void buildTridentRecipe(Consumer<FinishedRecipe> output, TagKey<Item> stick, TagKey<Item> material, ItemLike result) {
+	private void buildTridentRecipe(RecipeOutput output, TagKey<Item> stick, TagKey<Item> material, ItemLike result) {
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result)
 				.pattern(" MM")
 				.pattern(" SM")

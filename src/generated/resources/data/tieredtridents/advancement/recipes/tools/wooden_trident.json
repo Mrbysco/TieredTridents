@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/gold"
+            "items": "#minecraft:planks"
           }
         ]
       },
@@ -13,21 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tieredtridents:golden_trident"
+        "recipe": "tieredtridents:wooden_trident"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_material",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_material"
     ]
   ],
   "rewards": {
     "recipes": [
-      "tieredtridents:golden_trident"
+      "tieredtridents:wooden_trident"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

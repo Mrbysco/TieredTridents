@@ -1,42 +1,47 @@
 package com.mrbysco.tieredtridents.item;
 
-import com.google.common.collect.ImmutableMultimap;
 import com.mrbysco.tieredtridents.client.TridentBEWLR;
 import com.mrbysco.tieredtridents.registry.TridentRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TridentItem;
+import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class TieredTridentItem extends TridentItem {
 	private final Tier tier;
 
 	public TieredTridentItem(Properties properties, Tier tier) {
-		super(properties.defaultDurability(tier.getUses()));
+		super(properties
+				.component(DataComponents.TOOL, TridentItem.createToolProperties())
+				.attributes(SwordItem.createAttributes(tier, 3, -2.4F))
+		);
 		this.tier = tier;
-		int attackDamageModifier = 3;
-		float attackSpeedModifier = -2.4F;
+	}
 
-		float attackDamage = (float) attackDamageModifier + tier.getAttackDamageBonus();
-		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", attackDamage, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeedModifier, AttributeModifier.Operation.ADDITION));
-		this.defaultModifiers = builder.build();
+	public static Tool createToolProperties() {
+		return new Tool(List.of(
+				Tool.Rule.minesAndDrops(List.of(Blocks.COBWEB), 15.0F),
+				Tool.Rule.overrideSpeed(BlockTags.SWORD_EFFICIENT, 1.5F)
+		), 1.0F, 2);
 	}
 
 	@Override
-	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-		boolean flag = super.canApplyAtEnchantingTable(stack, enchantment) && !(enchantment == Enchantments.IMPALING || enchantment == Enchantments.RIPTIDE);
+	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+		boolean flag = super.supportsEnchantment(stack, enchantment) && !(enchantment == Enchantments.IMPALING || enchantment == Enchantments.RIPTIDE);
 		if (stack.is(TridentRegistry.COPPER_TRIDENT.get())) {
 			return flag;
 		}

@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:cobblestone/normal"
+            "items": "#c:ingots/iron"
           }
         ]
       },
@@ -13,21 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tieredtridents:stone_trident"
+        "recipe": "tieredtridents:iron_trident"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_material",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_material"
     ]
   ],
   "rewards": {
     "recipes": [
-      "tieredtridents:stone_trident"
+      "tieredtridents:iron_trident"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -15,7 +15,7 @@
     "S  "
   ],
   "result": {
-    "item": "tieredtridents:bone_trident"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "tieredtridents:bone_trident"
+  }
 }

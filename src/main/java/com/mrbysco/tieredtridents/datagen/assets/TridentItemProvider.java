@@ -6,9 +6,9 @@ import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class TridentItemProvider extends ItemModelProvider {
 	public TridentItemProvider(PackOutput output, ExistingFileHelper fileHelper) {
@@ -38,7 +38,7 @@ public class TridentItemProvider extends ItemModelProvider {
 		// Regular item model
 		getBuilder(itemId.toString())
 				.parent(new ModelFile.UncheckedModelFile("item/generated"))
-				.texture("layer0", new ResourceLocation(itemId.getNamespace(), "item/" + itemId.getPath()));
+				.texture("layer0", ResourceLocation.fromNamespaceAndPath(itemId.getNamespace(), "item/" + itemId.getPath()));
 
 		// In-hand model
 		getBuilder(inHandModel)

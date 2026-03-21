@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/iron"
+            "items": "#c:gems/diamond"
           }
         ]
       },
@@ -13,21 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tieredtridents:iron_trident"
+        "recipe": "tieredtridents:diamond_trident"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_material",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_material"
     ]
   ],
   "rewards": {
     "recipes": [
-      "tieredtridents:iron_trident"
+      "tieredtridents:diamond_trident"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

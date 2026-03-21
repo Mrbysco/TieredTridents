@@ -9,32 +9,28 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tiers;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
 
 public class TridentRegistry {
 
-	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, TieredTridents.MOD_ID);
+	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(TieredTridents.MOD_ID);
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, TieredTridents.MOD_ID);
 
-	public static final RegistryObject<Item> WOODEN_TRIDENT = ITEMS.register("wooden_trident", () -> new TieredTridentItem(itemBuilder(), Tiers.WOOD));
-	public static final RegistryObject<Item> STONE_TRIDENT = ITEMS.register("stone_trident", () -> new TieredTridentItem(itemBuilder(), Tiers.STONE));
-	public static final RegistryObject<Item> IRON_TRIDENT = ITEMS.register("iron_trident", () -> new TieredTridentItem(itemBuilder(), Tiers.IRON));
-	public static final RegistryObject<Item> COPPER_TRIDENT = ITEMS.register("copper_trident", () -> new TieredTridentItem(itemBuilder(), Tiers.IRON));
-	public static final RegistryObject<Item> GOLDEN_TRIDENT = ITEMS.register("golden_trident", () -> new TieredTridentItem(itemBuilder(), Tiers.GOLD));
-	public static final RegistryObject<Item> DIAMOND_TRIDENT = ITEMS.register("diamond_trident", () -> new TieredTridentItem(itemBuilder(), Tiers.DIAMOND));
-	public static final RegistryObject<Item> NETHERITE_TRIDENT = ITEMS.register("netherite_trident", () -> new TieredTridentItem(itemBuilder(), Tiers.NETHERITE));
-	public static final RegistryObject<Item> BONE_TRIDENT = ITEMS.register("bone_trident", () -> new TieredTridentItem(itemBuilder(), Tiers.STONE));
-	public static final RegistryObject<Item> PITCHFORK = ITEMS.register("pitchfork", () -> new TieredTridentItem(itemBuilder(), Tiers.STONE));
+	public static final DeferredItem<Item> WOODEN_TRIDENT = ITEMS.registerItem("wooden_trident", (properties) -> new TieredTridentItem(properties, Tiers.WOOD));
+	public static final DeferredItem<Item> STONE_TRIDENT = ITEMS.registerItem("stone_trident", (properties) -> new TieredTridentItem(properties, Tiers.STONE));
+	public static final DeferredItem<Item> IRON_TRIDENT = ITEMS.registerItem("iron_trident", (properties) -> new TieredTridentItem(properties, Tiers.IRON));
+	public static final DeferredItem<Item> COPPER_TRIDENT = ITEMS.registerItem("copper_trident", (properties) -> new TieredTridentItem(properties, Tiers.IRON));
+	public static final DeferredItem<Item> GOLDEN_TRIDENT = ITEMS.registerItem("golden_trident", (properties) -> new TieredTridentItem(properties, Tiers.GOLD));
+	public static final DeferredItem<Item> DIAMOND_TRIDENT = ITEMS.registerItem("diamond_trident", (properties) -> new TieredTridentItem(properties, Tiers.DIAMOND));
+	public static final DeferredItem<Item> NETHERITE_TRIDENT = ITEMS.registerItem("netherite_trident", (properties) -> new TieredTridentItem(properties, Tiers.NETHERITE));
+	public static final DeferredItem<Item> BONE_TRIDENT = ITEMS.registerItem("bone_trident", (properties) -> new TieredTridentItem(properties, Tiers.STONE));
+	public static final DeferredItem<Item> PITCHFORK = ITEMS.registerItem("pitchfork", (properties) -> new TieredTridentItem(properties, Tiers.STONE));
 
-	private static Item.Properties itemBuilder() {
-		return new Item.Properties();
-	}
-
-	public static final RegistryObject<CreativeModeTab> TAB = CREATIVE_MODE_TABS.register("items", () -> CreativeModeTab.builder()
+	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = CREATIVE_MODE_TABS.register("items", () -> CreativeModeTab.builder()
 			.icon(() -> new ItemStack(WOODEN_TRIDENT.get()))
 			.withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
 			.title(Component.translatable("itemGroup.tieredtridents"))

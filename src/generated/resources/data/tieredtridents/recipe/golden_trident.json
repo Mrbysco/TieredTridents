@@ -3,10 +3,10 @@
   "category": "equipment",
   "key": {
     "M": {
-      "item": "minecraft:blaze_powder"
+      "tag": "c:ingots/gold"
     },
     "S": {
-      "item": "minecraft:blaze_rod"
+      "tag": "c:rods/wooden"
     }
   },
   "pattern": [
@@ -15,7 +15,7 @@
     "S  "
   ],
   "result": {
-    "item": "tieredtridents:pitchfork"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "tieredtridents:golden_trident"
+  }
 }

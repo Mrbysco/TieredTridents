@@ -3,10 +3,10 @@
   "category": "equipment",
   "key": {
     "M": {
-      "tag": "forge:gems/diamond"
+      "tag": "c:gems/diamond"
     },
     "S": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:rods/wooden"
     }
   },
   "pattern": [
@@ -15,7 +15,7 @@
     "S  "
   ],
   "result": {
-    "item": "tieredtridents:diamond_trident"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "tieredtridents:diamond_trident"
+  }
 }

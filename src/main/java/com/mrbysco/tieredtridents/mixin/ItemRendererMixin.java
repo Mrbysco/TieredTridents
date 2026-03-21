@@ -2,7 +2,6 @@ package com.mrbysco.tieredtridents.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mrbysco.tieredtridents.TieredTridents;
 import com.mrbysco.tieredtridents.client.ClientHelper;
 import com.mrbysco.tieredtridents.item.TieredTridentItem;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -11,7 +10,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
@@ -21,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.StainedGlassPaneBlock;
+import net.neoforged.neoforge.client.ClientHooks;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -55,10 +54,10 @@ public abstract class ItemRendererMixin implements ResourceManagerReloadListener
 	public void render(ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack,
 	                   MultiBufferSource buffer, int combinedLight, int combinedOverlay, BakedModel p_model, CallbackInfo ci) {
 		if (itemStack.getItem() instanceof TieredTridentItem) {
-			ResourceLocation modelLocation = ClientHelper.tieredModels.getOrDefault(itemStack.getItem(), TRIDENT_MODEL);
+			ModelResourceLocation modelLocation = ClientHelper.tieredModels.getOrDefault(itemStack.getItem(), TRIDENT_MODEL);
 			BakedModel tridentModel = this.itemModelShaper.getModelManager().getModel(modelLocation);
 
-			tridentModel = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(poseStack, tridentModel, displayContext, leftHand);
+			tridentModel = ClientHooks.handleCameraTransforms(poseStack, tridentModel, displayContext, leftHand);
 			poseStack.translate(-0.5F, -0.5F, -0.5F);
 			boolean flag1;
 			if (displayContext != ItemDisplayContext.GUI && !displayContext.firstPerson() && itemStack.getItem() instanceof BlockItem) {

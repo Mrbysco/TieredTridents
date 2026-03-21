@@ -2,14 +2,8 @@ package com.mrbysco.tieredtridents.datagen.assets;
 
 import com.mrbysco.tieredtridents.TieredTridents;
 import com.mrbysco.tieredtridents.registry.TridentRegistry;
-import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.LanguageProvider;
+import net.neoforged.neoforge.common.data.LanguageProvider;
 
 public class TridentLanguageProvider extends LanguageProvider {
 	public TridentLanguageProvider(PackOutput output) {
