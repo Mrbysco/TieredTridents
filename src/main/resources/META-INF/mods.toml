@@ -11,7 +11,7 @@ displayURL="https://www.curseforge.com/minecraft/mc-mods/tiered-tridents"
 authors="Mrbysco"
 credits="Nekomaster for the idea"
 description='''
-
+Adds ore-tiered Tridents, along with some extras! 
 '''
 [[dependencies.tieredtridents]]
 modId="minecraft"
