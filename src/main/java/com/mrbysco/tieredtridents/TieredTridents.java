@@ -2,7 +2,7 @@ package com.mrbysco.tieredtridents;
 
 import com.mojang.logging.LogUtils;
 import com.mrbysco.tieredtridents.registry.TridentRegistry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
@@ -14,10 +14,11 @@ public class TieredTridents {
 
 	public TieredTridents(IEventBus eventBus) {
 		TridentRegistry.ITEMS.register(eventBus);
+		TridentRegistry.ENTITIES.register(eventBus);
 		TridentRegistry.CREATIVE_MODE_TABS.register(eventBus);
 	}
 
-	public static ResourceLocation modLoc(String path) {
-		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+	public static Identifier modLoc(String path) {
+		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}
 }

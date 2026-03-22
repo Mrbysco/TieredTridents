@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "M": {
-      "tag": "c:cobblestones/normal"
-    },
-    "S": {
-      "tag": "c:rods/wooden"
-    }
+    "M": "#c:cobblestones/normal",
+    "S": "#c:rods/wooden"
   },
   "pattern": [
     " MM",

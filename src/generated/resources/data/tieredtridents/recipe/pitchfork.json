@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "M": {
-      "item": "minecraft:blaze_powder"
-    },
-    "S": {
-      "item": "minecraft:blaze_rod"
-    }
+    "M": "minecraft:blaze_powder",
+    "S": "minecraft:blaze_rod"
   },
   "pattern": [
     " MM",

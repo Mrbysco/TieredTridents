@@ -1,16 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": {
-    "item": "minecraft:netherite_ingot"
-  },
-  "base": {
-    "item": "tieredtridents:diamond_trident"
-  },
+  "addition": "minecraft:netherite_ingot",
+  "base": "tieredtridents:diamond_trident",
   "result": {
-    "count": 1,
     "id": "tieredtridents:netherite_trident"
   },
-  "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
-  }
+  "template": "minecraft:netherite_upgrade_smithing_template"
 }

@@ -1,77 +1,78 @@
 package com.mrbysco.tieredtridents.datagen.assets;
 
 import com.mrbysco.tieredtridents.TieredTridents;
+import com.mrbysco.tieredtridents.client.TieredTridentSpecialRenderer;
 import com.mrbysco.tieredtridents.registry.TridentRegistry;
-import net.minecraft.client.renderer.block.model.BlockModel;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplate;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
 
-public class TridentItemProvider extends ItemModelProvider {
-	public TridentItemProvider(PackOutput output, ExistingFileHelper fileHelper) {
-		super(output, TieredTridents.MOD_ID, fileHelper);
+import java.util.Optional;
+
+public class TridentItemProvider extends ModelProvider {
+	public TridentItemProvider(PackOutput output) {
+		super(output, TieredTridents.MOD_ID);
 	}
 
 	@Override
-	protected void registerModels() {
-		tridentModels(TridentRegistry.WOODEN_TRIDENT.getId());
-		tridentModels(TridentRegistry.STONE_TRIDENT.getId());
-		tridentModels(TridentRegistry.IRON_TRIDENT.getId());
-		tridentModels(TridentRegistry.COPPER_TRIDENT.getId());
-		tridentModels(TridentRegistry.GOLDEN_TRIDENT.getId());
-		tridentModels(TridentRegistry.DIAMOND_TRIDENT.getId());
-		tridentModels(TridentRegistry.NETHERITE_TRIDENT.getId());
-		tridentModels(TridentRegistry.BONE_TRIDENT.getId());
-		tridentModels(TridentRegistry.PITCHFORK.getId());
+	protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+		generateTrident(itemModels, TridentRegistry.WOODEN_TRIDENT.get());
+		generateTrident(itemModels, TridentRegistry.STONE_TRIDENT.get());
+		generateTrident(itemModels, TridentRegistry.IRON_TRIDENT.get());
+		generateTrident(itemModels, TridentRegistry.COPPER_TRIDENT.get());
+		generateTrident(itemModels, TridentRegistry.GOLDEN_TRIDENT.get());
+		generateTrident(itemModels, TridentRegistry.DIAMOND_TRIDENT.get());
+		generateTrident(itemModels, TridentRegistry.NETHERITE_TRIDENT.get());
+		generateTrident(itemModels, TridentRegistry.BONE_TRIDENT.get());
+		generateTrident(itemModels, TridentRegistry.PITCHFORK.get());
 	}
 
-	private void tridentModels(ResourceLocation itemId) {
-		String path = itemId.getPath();
-		String inHandModel = path + "_in_hand";
-		String throwingModel = path + "_throwing";
-		ResourceLocation particleTexture = modLoc("item/" + path);
-		ModelFile throwingModelFile = new ModelFile.UncheckedModelFile(modLoc(ITEM_FOLDER + "/" + throwingModel).toString());
+	private static final ModelTemplate TRIDENT_IN_HAND_TEMPLATE = new ModelTemplate(
+			Optional.of(Identifier.withDefaultNamespace("item/trident_in_hand")),
+			Optional.empty(),
+			TextureSlot.PARTICLE
+	);
+	private static final ModelTemplate TRIDENT_THROWING_TEMPLATE = new ModelTemplate(
+			Optional.of(Identifier.withDefaultNamespace("item/trident_throwing")),
+			Optional.empty(),
+			TextureSlot.PARTICLE
+	);
 
-		// Regular item model
-		getBuilder(itemId.toString())
-				.parent(new ModelFile.UncheckedModelFile("item/generated"))
-				.texture("layer0", ResourceLocation.fromNamespaceAndPath(itemId.getNamespace(), "item/" + itemId.getPath()));
+	public void generateTrident(ItemModelGenerators itemModels, Item tridentItem) {
+		TextureMapping particle = new TextureMapping()
+				.put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(tridentItem));
 
-		// In-hand model
-		getBuilder(inHandModel)
-				.parent(new ModelFile.UncheckedModelFile("builtin/entity"))
-				.guiLight(BlockModel.GuiLight.FRONT)
-				.texture("particle", particleTexture)
-				.transforms()
-				.transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(0.0F, 60.0F, 0.0F).translation(11.0F, 17.0F, -2.0F).scale(1.0F, 1.0F, 1.0F).end()
-				.transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).rotation(0.0F, 60.0F, 0.0F).translation(3.0F, 17.0F, 12.0F).scale(1.0F, 1.0F, 1.0F).end()
-				.transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0.0F, -90.0F, 25.0F).translation(-3.0F, 17.0F, 1.0F).scale(1.0F, 1.0F, 1.0F).end()
-				.transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND).rotation(0.0F, 90.0F, -25.0F).translation(13.0F, 17.0F, 1.0F).scale(1.0F, 1.0F, 1.0F).end()
-				.transform(ItemDisplayContext.GUI).rotation(15.0F, -25.0F, -5.0F).translation(2.0F, 3.0F, 0.0F).scale(0.65F, 0.65F, 0.65F).end()
-				.transform(ItemDisplayContext.FIXED).rotation(0.0F, 180.0F, 0.0F).translation(-2.0F, 4.0F, -5.0F).scale(0.5F, 0.5F, 0.5F).end()
-				.transform(ItemDisplayContext.GROUND).rotation(0.0F, 0.0F, 0.0F).translation(4.0F, 4.0F, 2.0F).scale(0.25F, 0.25F, 0.25F).end()
-				.end()
-				.override()
-				.predicate(mcLoc("throwing"), 1.0F)
-				.model(throwingModelFile)
-				.end();
+		TRIDENT_IN_HAND_TEMPLATE.create(
+				ModelLocationUtils.getModelLocation(tridentItem, "_in_hand"),
+				particle,
+				itemModels.modelOutput
+		);
+		TRIDENT_THROWING_TEMPLATE.create(
+				ModelLocationUtils.getModelLocation(tridentItem, "_throwing"),
+				particle,
+				itemModels.modelOutput
+		);
 
-		// Throwing model
-		getBuilder(throwingModel)
-				.parent(new ModelFile.UncheckedModelFile("builtin/entity"))
-				.guiLight(BlockModel.GuiLight.FRONT)
-				.texture("particle", particleTexture)
-				.transforms()
-				.transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(0.0F, 90.0F, 180.0F).translation(8.0F, -17.0F, 9.0F).scale(1.0F, 1.0F, 1.0F).end()
-				.transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).rotation(0.0F, 90.0F, 180.0F).translation(8.0F, -17.0F, -7.0F).scale(1.0F, 1.0F, 1.0F).end()
-				.transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0.0F, -90.0F, 25.0F).translation(-3.0F, 17.0F, 1.0F).scale(1.0F, 1.0F, 1.0F).end()
-				.transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND).rotation(0.0F, 90.0F, -25.0F).translation(13.0F, 17.0F, 1.0F).scale(1.0F, 1.0F, 1.0F).end()
-				.transform(ItemDisplayContext.GUI).rotation(15.0F, -25.0F, -5.0F).translation(2.0F, 3.0F, 0.0F).scale(0.65F, 0.65F, 0.65F).end()
-				.transform(ItemDisplayContext.FIXED).rotation(0.0F, 180.0F, 0.0F).translation(-2.0F, 4.0F, -5.0F).scale(0.5F, 0.5F, 0.5F).end()
-				.transform(ItemDisplayContext.GROUND).rotation(0.0F, 0.0F, 0.0F).translation(4.0F, 4.0F, 2.0F).scale(0.25F, 0.25F, 0.25F).end()
-				.end();
+		ItemModel.Unbaked flat = ItemModelUtils.plainModel(itemModels.createFlatItemModel(tridentItem, ModelTemplates.FLAT_ITEM));
+		ItemModel.Unbaked inHand = ItemModelUtils.specialModel(
+				ModelLocationUtils.getModelLocation(tridentItem, "_in_hand"),
+				new TieredTridentSpecialRenderer.Unbaked()
+		);
+		ItemModel.Unbaked throwing = ItemModelUtils.specialModel(
+				ModelLocationUtils.getModelLocation(tridentItem, "_throwing"),
+				new TieredTridentSpecialRenderer.Unbaked()
+		);
+		ItemModel.Unbaked heldDispatch = ItemModelUtils.conditional(ItemModelUtils.isUsingItem(), throwing, inHand);
+		itemModels.itemModelOutput.accept(tridentItem, ItemModelGenerators.createFlatModelDispatch(flat, heldDispatch));
 	}
 }
