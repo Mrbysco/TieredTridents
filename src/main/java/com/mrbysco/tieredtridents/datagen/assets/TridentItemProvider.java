@@ -13,6 +13,7 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.renderer.special.TridentSpecialRenderer;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
@@ -48,6 +49,7 @@ public class TridentItemProvider extends ModelProvider {
 			TextureSlot.PARTICLE
 	);
 
+
 	public void generateTrident(ItemModelGenerators itemModels, Item tridentItem) {
 		TextureMapping particle = new TextureMapping()
 				.put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(tridentItem));
@@ -63,16 +65,16 @@ public class TridentItemProvider extends ModelProvider {
 				itemModels.modelOutput
 		);
 
-		ItemModel.Unbaked flat = ItemModelUtils.plainModel(itemModels.createFlatItemModel(tridentItem, ModelTemplates.FLAT_ITEM));
-		ItemModel.Unbaked inHand = ItemModelUtils.specialModel(
-				ModelLocationUtils.getModelLocation(tridentItem, "_in_hand"),
-				new TieredTridentSpecialRenderer.Unbaked()
+		ItemModel.Unbaked flatModel = ItemModelUtils.plainModel(itemModels.createFlatItemModel(tridentItem, ModelTemplates.FLAT_ITEM));
+		ItemModel.Unbaked inHandNormalModel = ItemModelUtils.specialModel(
+				ModelLocationUtils.getModelLocation(tridentItem, "_in_hand"), new TieredTridentSpecialRenderer.Unbaked()
 		);
-		ItemModel.Unbaked throwing = ItemModelUtils.specialModel(
-				ModelLocationUtils.getModelLocation(tridentItem, "_throwing"),
-				new TieredTridentSpecialRenderer.Unbaked()
+		ItemModel.Unbaked inHandThrowingModel = ItemModelUtils.specialModel(
+				ModelLocationUtils.getModelLocation(tridentItem, "_throwing"), new TieredTridentSpecialRenderer.Unbaked()
 		);
-		ItemModel.Unbaked heldDispatch = ItemModelUtils.conditional(ItemModelUtils.isUsingItem(), throwing, inHand);
-		itemModels.itemModelOutput.accept(tridentItem, ItemModelGenerators.createFlatModelDispatch(flat, heldDispatch));
+		ItemModel.Unbaked inHandModel = ItemModelUtils.conditional(
+				TridentSpecialRenderer.DEFAULT_TRANSFORMATION, ItemModelUtils.isUsingItem(), inHandThrowingModel, inHandNormalModel
+		);
+		itemModels.itemModelOutput.accept(tridentItem, ItemModelGenerators.createFlatModelDispatch(flatModel, inHandModel));
 	}
 }

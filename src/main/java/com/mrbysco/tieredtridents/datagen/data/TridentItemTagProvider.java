@@ -16,7 +16,7 @@ public class TridentItemTagProvider extends ItemTagsProvider {
 
 	@Override
 	protected void addTags(HolderLookup.Provider provider) {
-		tag(Tags.Items.TOOLS_SPEAR).add(
+		tag(Tags.Items.TOOLS_TRIDENT).add(
 				TridentRegistry.WOODEN_TRIDENT.asItem(),
 				TridentRegistry.STONE_TRIDENT.asItem(),
 				TridentRegistry.IRON_TRIDENT.asItem(),

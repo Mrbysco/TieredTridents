@@ -10,15 +10,13 @@ import net.minecraft.client.model.object.projectile.TridentModel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.renderer.rendertype.RenderType;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.feature.ItemFeatureRenderer;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.Item;
 
-import java.util.List;
 import java.util.Map;
 
 public class ThrownTieredTridentRenderer extends EntityRenderer<ThrownTieredTrident, ThrownTieredTridentRenderState> {
@@ -44,21 +42,20 @@ public class ThrownTieredTridentRenderer extends EntityRenderer<ThrownTieredTrid
 
 	@Override
 	public void submit(ThrownTieredTridentRenderState renderState, PoseStack poseStack,
-	                   SubmitNodeCollector nodeCollector, CameraRenderState cameraRenderState) {
+	                   SubmitNodeCollector nodeCollector, CameraRenderState camera) {
 		poseStack.pushPose();
 		poseStack.mulPose(Axis.YP.rotationDegrees(renderState.yRot - 90.0F));
 		poseStack.mulPose(Axis.ZP.rotationDegrees(renderState.xRot + 90.0F));
-		List<RenderType> list = ItemRenderer.getFoilRenderTypes(this.model.renderType(renderState.tridentTexture), false, renderState.isFoil);
-
-		for (int i = 0; i < list.size(); i++) {
-			nodeCollector.order(i)
-					.submitModel(
-							this.model, Unit.INSTANCE, poseStack, list.get(i), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, null, renderState.outlineColor, null
-					);
+		nodeCollector.order(0).submitModel(this.model, Unit.INSTANCE, poseStack, renderState.tridentTexture,
+				renderState.lightCoords, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
+		if (renderState.isFoil) {
+			nodeCollector.order(1).submitModel(this.model, Unit.INSTANCE, poseStack,
+					ItemFeatureRenderer.getFoilRenderType(this.model.renderType(renderState.tridentTexture), false),
+					renderState.lightCoords, OverlayTexture.NO_OVERLAY, renderState.outlineColor, null);
 		}
 
 		poseStack.popPose();
-		super.submit(renderState, poseStack, nodeCollector, cameraRenderState);
+		super.submit(renderState, poseStack, nodeCollector, camera);
 	}
 
 	@Override
