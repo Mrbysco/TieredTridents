@@ -1,1 +1,1 @@
-* Initial version for 1.21.1
+* Fix durability of the tridents
