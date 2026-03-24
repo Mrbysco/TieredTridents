@@ -16,7 +16,7 @@ Adds ore-tiered Tridents, along with some extras!
 [[dependencies.tieredtridents]]
 modId="minecraft"
 type="required"
-versionRange="[26.1-rc-1,)"
+versionRange="[26.1,)"
 ordering="NONE"
 side="BOTH"
 [[dependencies.tieredtridents]]
