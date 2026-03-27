@@ -1,1 +1,1 @@
-* Initial build
+* Fix Thrown Tiered Tridents looking like a regular trident when thrown
