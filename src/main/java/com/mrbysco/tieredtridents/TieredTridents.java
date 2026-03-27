@@ -14,6 +14,7 @@ public class TieredTridents {
 
 	public TieredTridents(IEventBus eventBus) {
 		TridentRegistry.ITEMS.register(eventBus);
+		TridentRegistry.ENTITIES.register(eventBus);
 		TridentRegistry.CREATIVE_MODE_TABS.register(eventBus);
 	}
 

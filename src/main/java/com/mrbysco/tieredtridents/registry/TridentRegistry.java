@@ -1,9 +1,13 @@
 package com.mrbysco.tieredtridents.registry;
 
 import com.mrbysco.tieredtridents.TieredTridents;
+import com.mrbysco.tieredtridents.entity.ThrownTieredTrident;
 import com.mrbysco.tieredtridents.item.TieredTridentItem;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -18,6 +22,7 @@ import java.util.List;
 public class TridentRegistry {
 
 	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(TieredTridents.MOD_ID);
+	public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, TieredTridents.MOD_ID);
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, TieredTridents.MOD_ID);
 
 	public static final DeferredItem<Item> WOODEN_TRIDENT = ITEMS.registerItem("wooden_trident", (properties) -> new TieredTridentItem(properties, Tiers.WOOD));
@@ -29,6 +34,13 @@ public class TridentRegistry {
 	public static final DeferredItem<Item> NETHERITE_TRIDENT = ITEMS.registerItem("netherite_trident", (properties) -> new TieredTridentItem(properties, Tiers.NETHERITE));
 	public static final DeferredItem<Item> BONE_TRIDENT = ITEMS.registerItem("bone_trident", (properties) -> new TieredTridentItem(properties, Tiers.STONE));
 	public static final DeferredItem<Item> PITCHFORK = ITEMS.registerItem("pitchfork", (properties) -> new TieredTridentItem(properties, Tiers.STONE));
+
+	public static final DeferredHolder<EntityType<?>, EntityType<ThrownTieredTrident>> TIERED_TRIDENT = ENTITIES.register("tiered_trident",
+			() -> EntityType.Builder.<ThrownTieredTrident>of(ThrownTieredTrident::new, MobCategory.MISC)
+					.sized(0.5F, 0.5F)
+					.clientTrackingRange(4)
+					.updateInterval(20)
+					.build("tiered_trident"));
 
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB = CREATIVE_MODE_TABS.register("items", () -> CreativeModeTab.builder()
 			.icon(() -> new ItemStack(WOODEN_TRIDENT.get()))

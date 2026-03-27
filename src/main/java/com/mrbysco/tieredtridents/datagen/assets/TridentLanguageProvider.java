@@ -10,7 +10,6 @@ public class TridentLanguageProvider extends LanguageProvider {
 		super(output, TieredTridents.MOD_ID, "en_us");
 	}
 
-
 	@Override
 	protected void addTranslations() {
 		add("itemGroup.tieredtridents", "Tiered Tridents");
