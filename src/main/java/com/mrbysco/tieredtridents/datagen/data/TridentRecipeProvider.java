@@ -1,6 +1,5 @@
 package com.mrbysco.tieredtridents.datagen.data;
 
-import com.mrbysco.tieredtridents.TieredTridents;
 import com.mrbysco.tieredtridents.registry.TridentRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;

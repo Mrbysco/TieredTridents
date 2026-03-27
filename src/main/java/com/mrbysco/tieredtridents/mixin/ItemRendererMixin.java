@@ -2,7 +2,6 @@ package com.mrbysco.tieredtridents.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mrbysco.tieredtridents.TieredTridents;
 import com.mrbysco.tieredtridents.client.ClientHelper;
 import com.mrbysco.tieredtridents.item.TieredTridentItem;
 import net.minecraft.client.multiplayer.ClientLevel;

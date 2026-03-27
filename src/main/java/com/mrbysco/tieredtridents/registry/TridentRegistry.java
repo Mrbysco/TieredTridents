@@ -1,9 +1,12 @@
 package com.mrbysco.tieredtridents.registry;
 
 import com.mrbysco.tieredtridents.TieredTridents;
+import com.mrbysco.tieredtridents.entity.ThrownTieredTrident;
 import com.mrbysco.tieredtridents.item.TieredTridentItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -18,6 +21,7 @@ import java.util.List;
 public class TridentRegistry {
 
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, TieredTridents.MOD_ID);
+	public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, TieredTridents.MOD_ID);
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, TieredTridents.MOD_ID);
 
 	public static final RegistryObject<Item> WOODEN_TRIDENT = ITEMS.register("wooden_trident", () -> new TieredTridentItem(itemBuilder(), Tiers.WOOD));
@@ -29,6 +33,13 @@ public class TridentRegistry {
 	public static final RegistryObject<Item> NETHERITE_TRIDENT = ITEMS.register("netherite_trident", () -> new TieredTridentItem(itemBuilder(), Tiers.NETHERITE));
 	public static final RegistryObject<Item> BONE_TRIDENT = ITEMS.register("bone_trident", () -> new TieredTridentItem(itemBuilder(), Tiers.STONE));
 	public static final RegistryObject<Item> PITCHFORK = ITEMS.register("pitchfork", () -> new TieredTridentItem(itemBuilder(), Tiers.STONE));
+
+	public static final RegistryObject<EntityType<ThrownTieredTrident>> TIERED_TRIDENT = ENTITIES.register("tiered_trident",
+			() -> EntityType.Builder.<ThrownTieredTrident>of(ThrownTieredTrident::new, MobCategory.MISC)
+					.sized(0.5F, 0.5F)
+					.clientTrackingRange(4)
+					.updateInterval(20)
+					.build("tiered_trident"));
 
 	private static Item.Properties itemBuilder() {
 		return new Item.Properties();

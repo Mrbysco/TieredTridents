@@ -17,6 +17,7 @@ public class TieredTridents {
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
 		TridentRegistry.ITEMS.register(eventBus);
+		TridentRegistry.ENTITIES.register(eventBus);
 		TridentRegistry.CREATIVE_MODE_TABS.register(eventBus);
 	}
 

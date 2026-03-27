@@ -1,14 +1,21 @@
 package com.mrbysco.tieredtridents.client;
 
 import com.mrbysco.tieredtridents.TieredTridents;
+import com.mrbysco.tieredtridents.client.renderer.ThrownTieredTridentRenderer;
 import com.mrbysco.tieredtridents.registry.TridentRegistry;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = TieredTridents.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientHandler {
+
+	@SubscribeEvent
+	public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+		event.registerEntityRenderer(TridentRegistry.TIERED_TRIDENT.get(), ThrownTieredTridentRenderer::new);
+	}
 
 	@SubscribeEvent
 	public static void modelRegistry(ModelEvent.RegisterAdditional event) {
