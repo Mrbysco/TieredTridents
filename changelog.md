@@ -1,1 +1,1 @@
-* Fix durability of the tridents
+* Fix Thrown Tiered Tridents looking like a regular trident when thrown
